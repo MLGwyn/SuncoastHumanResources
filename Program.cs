@@ -64,12 +64,43 @@ namespace SuncoastHumanResources
             while (keepGoing)
             {
                 Console.WriteLine();
-                Console.Write("What do you want to do? (A)dd an employee or (Q)uit: ");
+                Console.Write("What do you want to do?\n(A)dd an employee\n(S)how all employees\n(F)ind an Employee\n(Q)uit\n: ");
                 var choice = Console.ReadLine().ToUpper();
 
                 if (choice == "Q")
                 {
                     keepGoing = false;
+                }
+                else
+                if (choice == "S")
+                {
+                    Console.WriteLine("SHOWING THE EMPLOYEES");
+                    foreach (var emp in employees)
+                    {
+                        Console.WriteLine($"{emp.Name} is in department {emp.Department} and makes {emp.Salary}");
+                    }
+                }
+                else
+                if (choice == "F")
+                {
+                    var name = PromptForString("What employee are you looking for? ");
+
+                    Employee foundEmployee = null;
+                    foreach (var emp in employees)
+                    {
+                        if (emp.Name == name)
+                        {
+                            foundEmployee = emp;
+                        }
+                    }
+                    if (foundEmployee == null)
+                    {
+                        Console.WriteLine($"No \"{name}\" found");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{foundEmployee.Name} is in department {foundEmployee.Department} and makes {foundEmployee.Salary}");
+                    }
                 }
                 else
                 {
