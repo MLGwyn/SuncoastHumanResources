@@ -29,7 +29,7 @@ namespace SuncoastHumanResources
         static string PromptForString(string prompt)
         {
             Console.Write(prompt);
-            var userInput = Console.ReadLine();
+            var userInput = Console.ReadLine().ToUpper();
 
             return userInput;
         }
@@ -64,7 +64,7 @@ namespace SuncoastHumanResources
             while (keepGoing)
             {
                 Console.WriteLine();
-                Console.Write("What do you want to do?\n(A)dd an employee\n(S)how all employees\n(F)ind an Employee\n(Q)uit\n: ");
+                Console.Write("What do you want to do?\n(A)dd an employee\n(S)how all employees\n(F)ind an Employee\n(D)elete an employee\n(Q)uit\n: ");
                 var choice = Console.ReadLine().ToUpper();
 
                 if (choice == "Q")
@@ -85,18 +85,7 @@ namespace SuncoastHumanResources
                 {
                     var name = PromptForString("What employee are you looking for? ");
 
-                    // Employee foundEmployee = null;
-                    // foreach (var emp in employees)
-                    // {
-                    //     if (emp.Name == name)                //this is before using LINQ
-                    //     {
-                    //         foundEmployee = emp;
-                    //         break;
-                    //     }
-                    // }
-
-                    var foundEmployee = employees.FirstOrDefault(emp => emp.Name == name);      //This is using the above code in one line with LINQ
-
+                    var foundEmployee = employees.FirstOrDefault(emp => emp.Name == name);
                     if (foundEmployee == null)
                     {
                         Console.WriteLine($"No \"{name}\" found");
@@ -104,6 +93,23 @@ namespace SuncoastHumanResources
                     else
                     {
                         Console.WriteLine($"{foundEmployee.Name} is in department {foundEmployee.Department} and makes {foundEmployee.Salary}");
+                    }
+                }
+                else
+                if (choice == "D")
+                {
+                    Console.WriteLine($"You have {employees.Count} employees. ");
+                    var name = PromptForString("Which employee would you like to delete? ");
+
+                    var listOfEmployees = employees.Select(emp => emp.Name).ToList();
+                    var indexOfEmployee = listOfEmployees.IndexOf(name);
+
+                    var response = PromptForString($"Are you sure you want to delete {employees[indexOfEmployee].Name} from department {employees[indexOfEmployee].Department}? (Y/N) ");
+
+                    if (response == "Y")
+                    {
+                        employees.RemoveAt(indexOfEmployee);
+                        Console.WriteLine($"You have {employees.Count} employees. ");
                     }
                 }
                 else
