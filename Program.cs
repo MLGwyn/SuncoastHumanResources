@@ -55,15 +55,34 @@ namespace SuncoastHumanResources
         {
             var employees = new List<Employee>();
 
-            var employee = new Employee();
+
 
             DisplayGreeting();
 
-            employee.Name = PromptForString("What is your name? ");
-            employee.Department = PromptForInteger("What is your department number? ");
-            employee.Salary = PromptForInteger("What is your yearly salary (in dollars)? ");
+            var keepGoing = true;
 
-            Console.WriteLine($"Hello, {employee.Name} you make {employee.MonthlySalary()} dollars per month.");
+            while (keepGoing)
+            {
+                Console.WriteLine();
+                Console.Write("What do you want to do? (A)dd an employee or (Q)uit: ");
+                var choice = Console.ReadLine().ToUpper();
+
+                if (choice == "Q")
+                {
+                    keepGoing = false;
+                }
+                else
+                {
+                    var employee = new Employee();
+                    employee.Name = PromptForString("What is your name? ");
+                    employee.Department = PromptForInteger("What is your department number? ");
+                    employee.Salary = PromptForInteger("What is your yearly salary (in dollars)? ");
+
+                    Console.WriteLine($"Hello, {employee.Name} you make {employee.MonthlySalary()} dollars per month.");
+
+                    employees.Add(employee);
+                }
+            }
         }
     }
 }
