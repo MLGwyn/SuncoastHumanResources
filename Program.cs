@@ -64,7 +64,7 @@ namespace SuncoastHumanResources
             while (keepGoing)
             {
                 Console.WriteLine();
-                Console.Write("What do you want to do?\n(A)dd an employee\n(S)how all employees\n(F)ind an Employee\n(D)elete an employee\n(Q)uit\n: ");
+                Console.Write("What do you want to do?\n(A)dd an employee\n(S)how all employees\n(F)ind an employee\n(D)elete an employee\n(U)pdate an employee\n(Q)uit\n: ");
                 var choice = Console.ReadLine().ToUpper();
 
                 if (choice == "Q")
@@ -122,6 +122,35 @@ namespace SuncoastHumanResources
                             // Console.WriteLine($"You have {employees.Count} employees. ");
                             employees.Remove(foundEmployee);
                             Console.WriteLine($"You have {employees.Count} employees. ");
+                        }
+                    }
+                }
+                else
+                if (choice == "U")
+                {
+                    var name = PromptForString("Which employee would you like to update? ");
+
+                    var foundEmployee = employees.FirstOrDefault(emp => emp.Name == name);
+                    if (foundEmployee == null)
+                    {
+                        Console.WriteLine($"No \"{name}\" found");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{foundEmployee.Name} is in department {foundEmployee.Department} and makes ${foundEmployee.Salary}. ");
+                        var response = PromptForString("What would you like to change [Name/Department/Salary]? ").ToUpper();
+
+                        if (response == "NAME")
+                        {
+                            foundEmployee.Name = PromptForString("What is the employees new name? ");
+                        }
+                        if (response == "DEPARTMENT")
+                        {
+                            foundEmployee.Department = PromptForInteger("What is the employees new department number? ");
+                        }
+                        if (response == "SALARY")
+                        {
+                            foundEmployee.Salary = PromptForInteger("What is the employees new salary? ");
                         }
                     }
                 }
