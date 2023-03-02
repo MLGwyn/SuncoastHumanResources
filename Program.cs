@@ -101,15 +101,28 @@ namespace SuncoastHumanResources
                     Console.WriteLine($"You have {employees.Count} employees. ");
                     var name = PromptForString("Which employee would you like to delete? ");
 
-                    var listOfEmployees = employees.Select(emp => emp.Name).ToList();
-                    var indexOfEmployee = listOfEmployees.IndexOf(name);
-
-                    var response = PromptForString($"Are you sure you want to delete {employees[indexOfEmployee].Name} from department {employees[indexOfEmployee].Department}? (Y/N) ");
-
-                    if (response == "Y")
+                    var foundEmployee = employees.FirstOrDefault(emp => emp.Name == name);
+                    if (foundEmployee == null)
                     {
-                        employees.RemoveAt(indexOfEmployee);
-                        Console.WriteLine($"You have {employees.Count} employees. ");
+                        Console.WriteLine($"No \"{name}\" found.");
+                    }
+                    else
+                    {
+                        // var listOfEmployees = employees.Select(emp => emp.Name).ToList();
+                        // var indexOfEmployee = listOfEmployees.IndexOf(name);
+                        // var response = PromptForString($"Are you sure you want to delete {employees[indexOfEmployee].Name} from department {employees[indexOfEmployee].Department}? (Y/N) ");
+                        // var response = PromptForString($"Are you sure you want to delete {foundEmployee.Name} from department {foundEmployee.Department}? (Y/N) ");
+                        var response = PromptForString($"Are you sure you want to Delete {foundEmployee.Name} from department {foundEmployee.Department}? [Y/N]");
+
+                        if (response == "Y")
+                        {
+                            //employees = employees.Where(emp => emp.Name != name).ToList();
+                            // employees = employees.Where(emp => emp != foundEmployee).ToList();
+                            // employees.RemoveAt(indexOfEmployee);
+                            // Console.WriteLine($"You have {employees.Count} employees. ");
+                            employees.Remove(foundEmployee);
+                            Console.WriteLine($"You have {employees.Count} employees. ");
+                        }
                     }
                 }
                 else
