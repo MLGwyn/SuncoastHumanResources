@@ -55,37 +55,31 @@ namespace SuncoastHumanResources
                 Console.Write("What do you want to do?\n(A)dd an employee\n(S)how all employees\n(F)ind an employee\n(D)elete an employee\n(U)pdate an employee\n(Q)uit\n: ");
                 var choice = Console.ReadLine().ToUpper();
 
-                if (choice == "Q")
+                switch (choice)
                 {
-                    keepGoing = false;
+                    case "Q":
+                        keepGoing = false;
+                        break;
+                    case "S":
+                        ShowEmployees(database);
+                        break;
+                    case "F":
+                        FindEmployee(database);
+                        break;
+                    case "D":
+                        DeleteEmployee(database);
+                        break;
+                    case "U":
+                        UpdateEmployee(database);
+                        break;
+                    case "A":
+                        AddEmployee(database);
+                        break;
+                    default:
+                        Console.WriteLine("Not a valid input. ☠️ ");
+                        break;
                 }
-                else
-                if (choice == "S")
-                {
-                    ShowEmployees(database);
-                }
-                else
-                if (choice == "F")
-                {
-                    FindEmployee(database);
-                }
-                else
-                if (choice == "D")
-                {
-                    DeleteEmployee(database);
-                }
-                else
-                if (choice == "U")
-                {
-                    UpdateEmployee(database);
-                }
-                else
-                if (choice == "A")
-                    AddEmployee(database);
-                else
-                {
-                    Console.WriteLine("Not a valid input. ☠️ ");
-                }
+
             }
         }
 
