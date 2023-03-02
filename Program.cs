@@ -85,14 +85,18 @@ namespace SuncoastHumanResources
                 {
                     var name = PromptForString("What employee are you looking for? ");
 
-                    Employee foundEmployee = null;
-                    foreach (var emp in employees)
-                    {
-                        if (emp.Name == name)
-                        {
-                            foundEmployee = emp;
-                        }
-                    }
+                    // Employee foundEmployee = null;
+                    // foreach (var emp in employees)
+                    // {
+                    //     if (emp.Name == name)                //this is before using LINQ
+                    //     {
+                    //         foundEmployee = emp;
+                    //         break;
+                    //     }
+                    // }
+
+                    var foundEmployee = employees.FirstOrDefault(emp => emp.Name == name);      //This is using the above code in one line with LINQ
+
                     if (foundEmployee == null)
                     {
                         Console.WriteLine($"No \"{name}\" found");
