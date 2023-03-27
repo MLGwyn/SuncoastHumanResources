@@ -12,7 +12,7 @@ namespace SuncoastHumanResources
 
         public void LoadEmployees()
         {
-            var employees = new List<Employee>();
+            // var employees = new List<Employee>();
             if (File.Exists("employees.csv"))
             {
                 var fileReader = new StreamReader("employees.csv");

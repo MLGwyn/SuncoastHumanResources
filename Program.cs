@@ -68,12 +68,15 @@ namespace SuncoastHumanResources
                         break;
                     case "D":
                         DeleteEmployee(database);
+                        database.SaveEmployees();
                         break;
                     case "U":
                         UpdateEmployee(database);
+                        database.SaveEmployees();
                         break;
                     case "A":
                         AddEmployee(database);
+                        database.SaveEmployees();
                         break;
                     default:
                         Console.WriteLine("Not a valid input. ☠️ ");
@@ -81,7 +84,7 @@ namespace SuncoastHumanResources
                 }
 
             }
-            database.SaveEmployees();
+
         }
 
         private static void DeleteEmployee(EmployeeDatabase database)
