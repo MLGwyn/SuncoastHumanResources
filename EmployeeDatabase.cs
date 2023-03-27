@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using CsvHelper;
 
 namespace SuncoastHumanResources
 {
@@ -7,6 +10,20 @@ namespace SuncoastHumanResources
     {
         private List<Employee> Employees { get; set; } = new List<Employee>();
 
+        public void LoadEmployees()
+        {
+            var fileReader = new StreamReader("employees.csv");
+            var csvReader = new CsvReader(fileReader, CultureInfo.InvariantCulture);
+            Employees = csvReader.GetRecords<Employee>().ToList();
+            fileReader.Close();
+        }
+        public void SaveEmployees()
+        {
+            var fileWriter = new StreamWriter("employees.csv");
+            var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
+            csvWriter.WriteRecords(Employees);
+            fileWriter.Close();
+        }
         public void AddEmployee(Employee newEmployee)
         {
             Employees.Add(newEmployee);

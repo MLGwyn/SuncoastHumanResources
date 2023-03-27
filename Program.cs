@@ -48,7 +48,7 @@ namespace SuncoastHumanResources
             DisplayGreeting();
 
             var keepGoing = true;
-
+            database.LoadEmployees();
             while (keepGoing)
             {
                 Console.WriteLine();
@@ -81,6 +81,7 @@ namespace SuncoastHumanResources
                 }
 
             }
+            database.SaveEmployees();
         }
 
         private static void DeleteEmployee(EmployeeDatabase database)
